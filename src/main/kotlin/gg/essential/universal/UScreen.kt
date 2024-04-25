@@ -40,6 +40,7 @@ abstract class UScreen(
     ) : this(restoreCurrentGuiOnClose, newGuiScale, null)
 
     private var guiScaleToRestore = -1
+    private var restoredGuiScale = false
     private val screenToRestore: GuiScreen? = if (restoreCurrentGuiOnClose) currentScreen else null
 
     //#if MC>=12000
@@ -141,8 +142,10 @@ abstract class UScreen(
     //$$
     //$$ final override fun onClose() {
     //$$     onScreenClose()
-    //$$     if (guiScaleToRestore != -1)
+    //$$     if (guiScaleToRestore != -1) {
+    //$$         restoredGuiScale = true
     //$$         UMinecraft.guiScale = guiScaleToRestore
+    //$$     }
     //$$ }
     //$$
     //#if MC>=12000
@@ -213,8 +216,10 @@ abstract class UScreen(
 
     final override fun onGuiClosed() {
         onScreenClose()
-        if (guiScaleToRestore != -1)
+        if (guiScaleToRestore != -1) {
+            restoredGuiScale = true
             UMinecraft.guiScale = guiScaleToRestore
+        }
     }
 
     final override fun drawWorldBackground(tint: Int) {
@@ -232,7 +237,7 @@ abstract class UScreen(
     }
 
     open fun updateGuiScale() {
-        if (newGuiScale != -1) {
+        if (newGuiScale != -1 && !restoredGuiScale) {
             if (guiScaleToRestore == -1)
                 guiScaleToRestore = UMinecraft.guiScale
             UMinecraft.guiScale = newGuiScale
