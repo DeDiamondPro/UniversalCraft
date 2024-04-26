@@ -22,3 +22,23 @@ tasks.jar {
         attributes(mapOf("FMLModType" to "LIBRARY"))
     }
 }
+
+version = "325+diamond.1.20.5"
+
+publishing {
+    repositories {
+
+        maven {
+            name = "diamond"
+
+            url = uri("https://maven.dediamondpro.dev/releases")
+
+            credentials {
+                username = System.getenv("MAVEN_DIAMOND_USER")
+                password = System.getenv("MAVEN_DIAMOND_PASSWORD")
+            }
+
+            version = project.version
+        }
+    }
+}
