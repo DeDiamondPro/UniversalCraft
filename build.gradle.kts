@@ -18,6 +18,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21")
 }
 
+repositories {
+    maven("https://maven.neoforged.net/releases/")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         languageVersion = "1.6"
@@ -31,7 +35,7 @@ tasks.jar {
     }
 }
 
-version = "325+diamond.1.20.5"
+version = "325+diamond.neoforge"
 
 publishing {
     repositories {

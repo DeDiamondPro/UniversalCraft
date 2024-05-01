@@ -6,9 +6,10 @@ pluginManagement {
         maven("https://maven.architectury.dev/")
         maven("https://maven.minecraftforge.net")
         maven("https://repo.essential.gg/repository/maven-public")
+        maven("https://maven.dediamondpro.dev/releases/")
     }
     plugins {
-        val egtVersion = "0.4.1"
+        val egtVersion = "0.5.0+neoforge"
         id("gg.essential.multi-version.root") version egtVersion
         id("gg.essential.multi-version.api-validation") version egtVersion
     }
@@ -42,6 +43,7 @@ listOf(
     "1.20.4-fabric",
     "1.20.4-forge",
     "1.20.5-fabric",
+    "1.20.5-neoforge",
 ).forEach { version ->
     include(":$version")
     project(":$version").apply {
