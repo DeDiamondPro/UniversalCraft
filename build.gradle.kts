@@ -35,7 +35,7 @@ tasks.jar {
     }
 }
 
-version = "325+diamond.neoforge"
+version = "337+diamond.neoforge"
 
 publishing {
     repositories {

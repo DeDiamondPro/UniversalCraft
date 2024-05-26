@@ -40,8 +40,9 @@ abstract class UScreen(
     ) : this(restoreCurrentGuiOnClose, newGuiScale, null)
 
     private var guiScaleToRestore = -1
-    private var restoredGuiScale = false
+    private var restoringGuiScale = false
     private val screenToRestore: GuiScreen? = if (restoreCurrentGuiOnClose) currentScreen else null
+    private var suppressBackground = false
 
     //#if MC>=12000
     //$$ private var drawContexts = mutableListOf<DrawContext>()
@@ -154,6 +155,7 @@ abstract class UScreen(
     //$$     lastBackgroundMouseX = mouseX
     //$$     lastBackgroundMouseY = mouseY
     //$$     lastBackgroundDelta = delta
+    //$$     if (suppressBackground) return
     //#else
     //$$ final override fun renderBackground(context: DrawContext) {
     //#endif
@@ -231,8 +233,9 @@ abstract class UScreen(
     }
 
     open fun updateGuiScale() {
-        if (newGuiScale != -1 && guiScaleToRestore == -1) {
-            guiScaleToRestore = UMinecraft.guiScale
+        if (newGuiScale != -1 && !restoringGuiScale) {
+            if (guiScaleToRestore == -1)
+                guiScaleToRestore = UMinecraft.guiScale
             UMinecraft.guiScale = newGuiScale
             width = UResolution.scaledWidth
             height = UResolution.scaledHeight
@@ -241,11 +244,13 @@ abstract class UScreen(
 
     private fun restoreGuiScale() {
         if (guiScaleToRestore != -1) {
+            // This flag is necessary since on 1.20.5 setting the gui scale causes the screen's resize
+            // method to be called due to an option change callback. This resize causes the screen to reinitialize,
+            // which calls updateGuiScale. To prevent that method for changing the gui scale back,
+            // we suppress its behavior with a flag.
+            restoringGuiScale = true
             UMinecraft.guiScale = guiScaleToRestore
-            // We reset this after setting the gui scale, since on 1.20.5 and above, setting the gui scale causes
-            // the screen to be resized due to an option change callback. This resize causes the screen to
-            // reinitialize, which calls updateGuiScale. To prevent that method for changing the gui scale back,
-            // we only set the gui scale from that method when guiScaleToRestore is -1.
+            restoringGuiScale = false
             guiScaleToRestore = -1
         }
     }
@@ -259,6 +264,7 @@ abstract class UScreen(
     }
 
     open fun onDrawScreen(matrixStack: UMatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        suppressBackground = true
         //#if MC>=12000
         //$$ withDrawContext(matrixStack) { drawContext ->
         //$$     super.render(drawContext, mouseX, mouseY, partialTicks)
@@ -274,6 +280,7 @@ abstract class UScreen(
             //#endif
         }
         //#endif
+        suppressBackground = false
     }
 
     @Deprecated(
