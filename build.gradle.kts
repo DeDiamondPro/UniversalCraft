@@ -35,6 +35,13 @@ tasks.jar {
     }
 }
 
+
+if (platform.isForge && platform.mcVersion >= 12100) {
+    tasks.remapJar {
+        enabled = false
+    }
+}
+
 version = "342+diamond.neoforge"
 
 publishing {

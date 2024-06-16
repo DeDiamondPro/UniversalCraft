@@ -9,6 +9,8 @@ plugins {
 version = versionFromBuildIdAndBranch()
 
 preprocess {
+    val neoForge12100 = createNode("1.21-neoforge", 12100, "srg")
+    val forge12100 = createNode("1.21-forge", 12100, "srg")
     val fabric12100 = createNode("1.21-fabric", 12100, "srg")
     val neoForge12006 = createNode("1.20.6-neoforge", 12006, "srg")
     val fabric12006 = createNode("1.20.6-fabric", 12006, "srg")
@@ -37,6 +39,8 @@ preprocess {
     val forge11202 = createNode("1.12.2-forge", 11202, "srg")
     val forge10809 = createNode("1.8.9-forge", 10809, "srg")
 
+    neoForge12100.link(fabric12100)
+    forge12100.link(fabric12100)
     fabric12100.link(fabric12006)
     neoForge12006.link(fabric12006)
     fabric12006.link(fabric12004)

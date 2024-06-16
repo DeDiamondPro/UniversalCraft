@@ -9,7 +9,7 @@ pluginManagement {
         maven("https://maven.dediamondpro.dev/releases/")
     }
     plugins {
-        val egtVersion = "0.6.0"
+        val egtVersion = "0.6.0+diamond.neofix"
         id("gg.essential.multi-version.root") version egtVersion
         id("gg.essential.multi-version.api-validation") version egtVersion
     }
@@ -44,11 +44,10 @@ listOf(
     "1.20.4-forge",
     "1.20.4-neoforge",
     "1.20.6-fabric",
-<<<<<<< HEAD
     "1.20.6-neoforge",
-=======
     "1.21-fabric",
->>>>>>> upstream/master
+    "1.21-forge",
+    "1.21-neoforge",
 ).forEach { version ->
     include(":$version")
     project(":$version").apply {
