@@ -44,7 +44,11 @@ listOf(
     "1.20.4-forge",
     "1.20.4-neoforge",
     "1.20.6-fabric",
+<<<<<<< HEAD
     "1.20.6-neoforge",
+=======
+    "1.21-fabric",
+>>>>>>> upstream/master
 ).forEach { version ->
     include(":$version")
     project(":$version").apply {
