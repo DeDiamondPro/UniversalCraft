@@ -9,7 +9,7 @@ pluginManagement {
         maven("https://maven.dediamondpro.dev/releases/")
     }
     plugins {
-        val egtVersion = "0.6.2"
+        val egtVersion = "0.6.2+diamond.loom1.6.17"
         id("gg.essential.multi-version.root") version egtVersion
         id("gg.essential.multi-version.api-validation") version egtVersion
     }
