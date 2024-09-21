@@ -29,10 +29,9 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.jar {
-    manifest {
-        attributes(mapOf("FMLModType" to "LIBRARY"))
-    }
+preprocess {
+    vars.put("STANDALONE", 0)
+    vars.put("!STANDALONE", 1)
 }
 
 
@@ -42,7 +41,7 @@ if (platform.isForge && platform.mcVersion >= 12100) {
     }
 }
 
-version = "342+diamond.neoforge"
+version = "363+diamond.neoforge"
 
 publishing {
     repositories {

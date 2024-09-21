@@ -9,7 +9,7 @@ pluginManagement {
         maven("https://maven.dediamondpro.dev/releases/")
     }
     plugins {
-        val egtVersion = "0.6.0+diamond.neofix"
+        val egtVersion = "0.6.2"
         id("gg.essential.multi-version.root") version egtVersion
         id("gg.essential.multi-version.api-validation") version egtVersion
     }
@@ -17,6 +17,9 @@ pluginManagement {
 
 rootProject.name = "UniversalCraft"
 rootProject.buildFileName = "root.gradle.kts"
+
+include(":standalone")
+include(":standalone:example")
 
 listOf(
     "1.8.9-forge",

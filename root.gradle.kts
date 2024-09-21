@@ -9,6 +9,7 @@ plugins {
 version = versionFromBuildIdAndBranch()
 
 preprocess {
+    strictExtraMappings.set(true)
     val neoForge12100 = createNode("1.21-neoforge", 12100, "srg")
     val forge12100 = createNode("1.21-forge", 12100, "srg")
     val fabric12100 = createNode("1.21-fabric", 12100, "srg")
@@ -66,5 +67,9 @@ preprocess {
     fabric11701.link(fabric11602, file("versions/1.17.1-1.16.2.txt"))
     fabric11602.link(forge11602)
     forge11602.link(forge11202, file("versions/1.16.2-1.12.2.txt"))
-    forge11202.link(forge10809, file("versions/1.12.2-1.8.9.txt"))
+    forge11202.link(forge10809)
+}
+
+apiValidation {
+    ignoredProjects += listOf("standalone", "example")
 }
