@@ -10,6 +10,7 @@ version = versionFromBuildIdAndBranch()
 
 preprocess {
     strictExtraMappings.set(true)
+    val neoForge12103 = createNode("1.21.3-neoforge", 12103, "srg")
     val fabric12102 = createNode("1.21.2-fabric", 12102, "srg")
     val neoForge12100 = createNode("1.21-neoforge", 12100, "srg")
     val forge12100 = createNode("1.21-forge", 12100, "srg")
@@ -41,6 +42,7 @@ preprocess {
     val forge11202 = createNode("1.12.2-forge", 11202, "srg")
     val forge10809 = createNode("1.8.9-forge", 10809, "srg")
 
+    neoForge12103.link(fabric12102)
     fabric12102.link(fabric12100)
     neoForge12100.link(fabric12100)
     forge12100.link(fabric12100)
