@@ -41,7 +41,7 @@ if (platform.isForge && platform.mcVersion >= 12100) {
     }
 }
 
-version = "363+diamond.neoforge"
+version = "369+diamond"
 
 publishing {
     repositories {
